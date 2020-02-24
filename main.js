@@ -37,32 +37,32 @@ const morseCode = {
     9: '____.'
 };
 
+// separate words to strings
+// function to filter words into morse with spaces between letters
+// join words together with spaces between
 
-//    const convert = morseObject[0][morseValue];
+const morseTranslator = () => {
 
-//get input from html and split into string array for each letter
-//
+    const getInput = document.getElementById("input").value.toLowerCase().split(" ");
 
-const translate = (morseObject, toTranslate) => {
+    const convertWord = word => {
 
-    const stringArray = toTranslate.split(""); //split input into array of arrays
-    console.log(stringArray);
-    
-    // const convert = letter => {
-    //     return Object.keys(morseObject).find(key => morseObject[key]===letter);
-    // }
+        const changeLetter = letter => {
+            const getMorse = morseCode[letter].split("");
+            
+            const addCharSpace = getMorse.map(morseChar => morseChar + "&nbsp");
+            
+            const morseLetterWithSpaces = addCharSpace.join("") + "&nbsp" + "&nbsp" + "&nbsp";
+            return morseLetterWithSpaces;
+        }
 
-    const convert = keyAndValue => {
-        return keyAndValue.hasOwnProperty(keyAndValue);
+        let changeWord = word.split("").map(changeLetter) ;
+        
+        return changeWord.join("")+ "&nbsp" + "&nbsp" + "&nbsp" + "&nbsp" + "&nbsp" + "&nbsp" + "&nbsp";
     }
 
-    const converted = morseObject.map(convert);
-    
-    console.log(converted);
-    
-    // const getBoth = morseArray.filter(testArray);
-    
-    
-}
+    let changeToMorse = getInput.map(convertWord);
 
-translate(morseCode, "PETER");
+    document.getElementById("output").innerHTML = changeToMorse.join("");
+      
+}
