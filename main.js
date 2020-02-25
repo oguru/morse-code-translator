@@ -34,55 +34,41 @@ const morseCode = {
     6: '_....',
     7: '__...',
     8: '___..',
-    9: '____.'
+    9: '____.',
+    "&nbsp": "/"
 };
-
-// check if morse or word
-// if statement
-// split at / for words
-// split at " " for letters
-// change to letters
-// return words with spaces between
-// send to dom
 
 const changeLetter = letter => {
     const getMorse = morseCode[letter].split("");
-    
-    const addCharSpace = getMorse.map(morseChar => morseChar + "&nbsp");
-    
+    const addCharSpace = getMorse.map(morseChar => morseChar + "&nbsp"); 
     const morseLetterWithSpaces = addCharSpace.join("") + "&nbsp" + "&nbsp" + "&nbsp";
-    // console.log(morseLetterWithSpaces);
-    
     return morseLetterWithSpaces;
 }
 
 const convertWord = word => {
-
     let changeWord = word.split("").map(changeLetter);    
     return changeWord.join("")+ "&nbsp" + "&nbsp" + "&nbsp" + "&nbsp" + "&nbsp" + "&nbsp" + "&nbsp";
 }
 
 const changeToWords = morseLetter => {
-    console.log(Object.keys(morseCode).find(key => morseCode[key] === morseLetter));
+    return Object.keys(morseCode).find(key => morseCode[key] === morseLetter);
 }
 
 
 const translateInput = () => {
-
     document.getElementById("output").innerHTML = "";
 
     //split input separated by spaces into an array
     const getInput = document.getElementById("input").value.toLowerCase().split(" ");
-    // console.log(getInput);
 
     //check to see if input is morse. If so run function to translate
     if (getInput[0].includes(".") || (getInput.includes("_"))) {
-        return getInput.map(changeToWords);
+        const convertedMorse = getInput.map(changeToWords);
+        document.getElementById("output").innerHTML = convertedMorse.join("");
     }
     
-
-    const changeToMorse = getInput.map(convertWord);
-
-    document.getElementById("output").innerHTML = changeToMorse.join("");
-      
+    else {
+        const changeToMorse = getInput.map(convertWord);
+        document.getElementById("output").innerHTML = changeToMorse.join("");
+    }
 }
