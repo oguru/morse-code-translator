@@ -37,31 +37,51 @@ const morseCode = {
     9: '____.'
 };
 
-// separate words to strings
-// function to filter words into morse with spaces between letters
-// join words together with spaces between
+// check if morse or word
+// if statement
+// split at / for words
+// split at " " for letters
+// change to letters
+// return words with spaces between
+// send to dom
 
-const morseTranslator = () => {
+const changeLetter = letter => {
+    const getMorse = morseCode[letter].split("");
+    
+    const addCharSpace = getMorse.map(morseChar => morseChar + "&nbsp");
+    
+    const morseLetterWithSpaces = addCharSpace.join("") + "&nbsp" + "&nbsp" + "&nbsp";
+    // console.log(morseLetterWithSpaces);
+    
+    return morseLetterWithSpaces;
+}
 
+const convertWord = word => {
+
+    let changeWord = word.split("").map(changeLetter);    
+    return changeWord.join("")+ "&nbsp" + "&nbsp" + "&nbsp" + "&nbsp" + "&nbsp" + "&nbsp" + "&nbsp";
+}
+
+const changeToWords = morseLetter => {
+    console.log(Object.keys(morseCode).find(key => morseCode[key] === morseLetter));
+}
+
+
+const translateInput = () => {
+
+    document.getElementById("output").innerHTML = "";
+
+    //split input separated by spaces into an array
     const getInput = document.getElementById("input").value.toLowerCase().split(" ");
+    // console.log(getInput);
 
-    const convertWord = word => {
-
-        const changeLetter = letter => {
-            const getMorse = morseCode[letter].split("");
-            
-            const addCharSpace = getMorse.map(morseChar => morseChar + "&nbsp");
-            
-            const morseLetterWithSpaces = addCharSpace.join("") + "&nbsp" + "&nbsp" + "&nbsp";
-            return morseLetterWithSpaces;
-        }
-
-        let changeWord = word.split("").map(changeLetter) ;
-        
-        return changeWord.join("")+ "&nbsp" + "&nbsp" + "&nbsp" + "&nbsp" + "&nbsp" + "&nbsp" + "&nbsp";
+    //check to see if input is morse. If so run function to translate
+    if (getInput[0].includes(".") || (getInput.includes("_"))) {
+        return getInput.map(changeToWords);
     }
+    
 
-    let changeToMorse = getInput.map(convertWord);
+    const changeToMorse = getInput.map(convertWord);
 
     document.getElementById("output").innerHTML = changeToMorse.join("");
       
