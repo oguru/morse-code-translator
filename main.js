@@ -60,6 +60,8 @@ const translateInput = () => {
 
     //split input separated by spaces into an array
     const getInput = document.getElementById("input").value.toLowerCase().split(" ");
+    console.log(getInput);
+    
 
     //check to see if input is morse. If so run function to translate
     if (getInput[0].includes(".") || (getInput.includes("_"))) {
