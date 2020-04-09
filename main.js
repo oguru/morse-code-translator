@@ -38,39 +38,67 @@ const morseCode = {
     "&nbsp": "/"
 };
 
+// //get canvas and drawing context
+// const canvas = document.getElementById('canv');
+// const ctx = canvas.getContext('2d');
+
+// const totalHeight = document.getElementById("mainSection").style.height
+// //set width and height
+// const canvasW = canvas.width = document.body.offsetWidth
+// // const canvasH = canvas.height = document.getElementById("mainSection").height
+
+
+
+
+//get morse value of letter, split to add spaces and return
 const changeLetter = letter => {
     const getMorse = morseCode[letter].split("");
-    const addCharSpace = getMorse.map(morseChar => morseChar + "&nbsp"); 
-    const morseLetterWithSpaces = addCharSpace.join("") + "&nbsp" + "&nbsp" + "&nbsp";
+    // const addCharSpace = getMorse.map(morseChar => morseChar + "&nbsp"); 
+    const morseLetterWithSpaces = getMorse.join("") + "&nbsp";
     return morseLetterWithSpaces;
 }
 
+//splits word to individual letters, runs a function to change each letter, joins the result back together with spaces and returns it
 const convertWord = word => {
-    let changeWord = word.split("").map(changeLetter);    
-    return changeWord.join("")+ "&nbsp" + "&nbsp" + "&nbsp" + "&nbsp" + "&nbsp" + "&nbsp" + "&nbsp";
+    let changeWord = word.split("").map(changeLetter);
+    return changeWord.join("") + "/" + "&nbsp";
 }
 
+//change dashes to underscore
+const changeDash = char => char === "-" ? "_" : char;
+
+//change from morse to letters
 const changeToWords = morseLetter => {
-    return Object.keys(morseCode).find(key => morseCode[key] === morseLetter);
+
+    let fixedFormat = morseLetter.split("").map(changeDash).join("");
+
+
+    return Object.keys(morseCode).find(key => morseCode[key] === fixedFormat);
 }
 
-
+//translation parent function
 const translateInput = () => {
     document.getElementById("output").innerHTML = "";
 
     //split input separated by spaces into an array
     const getInput = document.getElementById("input").value.toLowerCase().split(" ");
-    console.log(getInput);
-    
 
-    //check to see if input is morse. If so run function to translate
-    if (getInput[0].includes(".") || (getInput.includes("_"))) {
+    //check to see if input is morse. If so run function to translate,
+    if (getInput[0].includes(".") || (getInput[0].includes("_")) || (getInput[0].includes("-"))) {
         const convertedMorse = getInput.map(changeToWords);
+        console.log(convertedMorse);
+
         document.getElementById("output").innerHTML = convertedMorse.join("");
     }
-    
+
+    //else translate from words to morse
     else {
-        const changeToMorse = getInput.map(convertWord);
-        document.getElementById("output").innerHTML = changeToMorse.join("");
+        let changeToMorse = getInput.map(convertWord);
+
+        changeToMorse = changeToMorse.join("");
+
+        changeToMorse = changeToMorse.substring(0, changeToMorse.length - 11);
+
+        document.getElementById("output").innerHTML = changeToMorse;
     }
 }
