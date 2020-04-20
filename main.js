@@ -60,8 +60,13 @@ const changeToWords = morseLetter => {
     return Object.keys(morseCode).find(key => morseCode[key] === fixedFormat);
 }
 
+const removeInitText = () => {
+    document.getElementById("init-text").innerHTML = "";
+}
+
 //translation parent function
 const translateInput = () => {
+    removeInitText();
     document.getElementById("output").innerHTML = "";
 
     //split input separated by spaces into an array

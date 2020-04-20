@@ -7,9 +7,10 @@
     <title>Morse Code Translator</title>
     <link rel="stylesheet" href="main.css">
     <script src="./main.js" async defer></script>
+    <link rel="icon" href="./images/favicon.ico" type="image/x-icon">
 </head>
 <body>
-    <section id="mainSection">    
+    <section>    
             <div>
                 <div class="shadow block"></div>
                 <img src="./images/spy.png" alt="spy">
@@ -20,6 +21,7 @@
                 <input type="text" id="input" name="input">
                 <button onclick="translateInput()">Translate</button>
             </div>
+            <p id="init-text">Type above to start. For Morse to text, separate letters with a space and words with a single / with 1 space either side.</p>
             <textarea readonly id="output"></textarea>
     </section>
 </body>
