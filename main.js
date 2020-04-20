@@ -38,22 +38,9 @@ const morseCode = {
     "&nbsp": "/"
 };
 
-// //get canvas and drawing context
-// const canvas = document.getElementById('canv');
-// const ctx = canvas.getContext('2d');
-
-// const totalHeight = document.getElementById("mainSection").style.height
-// //set width and height
-// const canvasW = canvas.width = document.body.offsetWidth
-// // const canvasH = canvas.height = document.getElementById("mainSection").height
-
-
-
-
 //get morse value of letter, split to add spaces and return
 const changeLetter = letter => {
     const getMorse = morseCode[letter].split("");
-    // const addCharSpace = getMorse.map(morseChar => morseChar + "&nbsp"); 
     const morseLetterWithSpaces = getMorse.join("") + "&nbsp";
     return morseLetterWithSpaces;
 }
@@ -69,10 +56,7 @@ const changeDash = char => char === "-" ? "_" : char;
 
 //change from morse to letters
 const changeToWords = morseLetter => {
-
     let fixedFormat = morseLetter.split("").map(changeDash).join("");
-
-
     return Object.keys(morseCode).find(key => morseCode[key] === fixedFormat);
 }
 
@@ -86,19 +70,14 @@ const translateInput = () => {
     //check to see if input is morse. If so run function to translate,
     if (getInput[0].includes(".") || (getInput[0].includes("_")) || (getInput[0].includes("-"))) {
         const convertedMorse = getInput.map(changeToWords);
-        console.log(convertedMorse);
-
         document.getElementById("output").innerHTML = convertedMorse.join("");
     }
 
     //else translate from words to morse
     else {
         let changeToMorse = getInput.map(convertWord);
-
         changeToMorse = changeToMorse.join("");
-
         changeToMorse = changeToMorse.substring(0, changeToMorse.length - 11);
-
         document.getElementById("output").innerHTML = changeToMorse;
     }
 }

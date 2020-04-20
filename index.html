@@ -9,9 +9,6 @@
     <script src="./main.js" async defer></script>
 </head>
 <body>
-    <div id="canvasCont">
-        <canvas width="500" height="200" id="canv" />
-    </div>
     <section id="mainSection">    
             <div>
                 <div class="shadow block"></div>
@@ -20,11 +17,10 @@
             <div id="translator">
                 <h1>Morse Code Translator</h1>
                 <label for="input">Input: </label>
-                <input oninput="translateInput()" type="text" id="input" name="input">
+                <input type="text" id="input" name="input">
                 <button onclick="translateInput()">Translate</button>
             </div>
             <textarea readonly id="output"></textarea>
     </section>
 </body>
 </html>
-
