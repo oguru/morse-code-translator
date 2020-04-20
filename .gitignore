@@ -1,6 +1,2 @@
-# Removing css files
-*.css
-*.css.map
-
 # vscode settings
 settings.json
